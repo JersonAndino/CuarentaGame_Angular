@@ -2,6 +2,7 @@
 var express=require('express');
 var bodyParser=require('body-parser');
 var app=express();
+var usuarioRoutes=require('./routes/usuario.routes');
 // var librosRoutes=require('./routes/libros.routes');
 // var cuentasRoutes=require('./routes/cuentas.routes');
 // var transaccionesRoutes=require('./routes/transacciones.routes');
@@ -52,6 +53,7 @@ app.get('/',(req,res)=>{
 })
 */
 
+app.use('/API/',usuarioRoutes);
 // app.use('/',librosRoutes);
 // app.use('/',cuentasRoutes);
 // app.use('/',transaccionesRoutes);
