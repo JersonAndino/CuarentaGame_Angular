@@ -6,7 +6,7 @@ var multiparty=require('connect-multiparty');
 var multipartyMiddleWare=multiparty({uploadDir:'./uploads'});
 
 router.post('/usuario',usuarioController.saveUsuario);
-// router.get('/usuario',cuentasController.getCuentasUser);
+router.get('/usuario',usuarioController.obtenerUsuarios);
 // router.get('/usuario/:id',cuentasController.validarCuenta);
 // router.delete('/usuario/:id', cuentasController.desactivarCuenta);
 router.post('/login',usuarioController.login);

@@ -34,7 +34,14 @@ var controller={
         
     },
     obtenerUsuarios:function(req,res){
-        // Usuario.find({})
+        Usuario.find({}).sort()
+        .then(result=>{
+            console.log(result);
+            if (!result) return res.status(404).send({message:'no usuario'});
+
+            return res.status(200).send({result:result});
+        })
+        .catch(err=>{console.log(err)})
     },
     login:function(req,res){
         var username=req.body.username;

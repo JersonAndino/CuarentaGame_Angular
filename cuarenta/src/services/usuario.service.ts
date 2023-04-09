@@ -27,6 +27,11 @@ guardarUsuario(usuario:any):Observable<any>{
     // console.log(params);
     return this._http.post(this.url+'usuario',params,{headers:headers});
 }
+getUsuarios():Observable<any>{
+    let headers=new HttpHeaders().set('Content-Type','application/json');
+    // console.log(params);
+    return this._http.get(this.url+'usuario',{headers:headers});
+}
 // login
 //http://localhost:3600/login
 login(data:any):Observable<any>{

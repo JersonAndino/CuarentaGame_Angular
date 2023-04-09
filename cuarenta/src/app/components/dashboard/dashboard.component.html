@@ -1,3 +1,11 @@
+<style>
+    .side{
+        width: 300px;
+    }
+</style>
 <div *ngIf="loggedIn==true" id="slide">
     <app-chats></app-chats>
+    <div class="side">
+        <app-usuarios></app-usuarios>
+    </div>
 </div>
