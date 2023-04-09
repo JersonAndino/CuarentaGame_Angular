@@ -14,18 +14,19 @@
         <form class="needs-validation" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
             <div>
                 <label for="username">Username</label><br>
-                <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid':!f('username') || !usuarioValido}" #username required>
+                <input type="text" class="form-control" id="username" formControlName="username" [ngClass]="{'is-invalid':!f('username') || !usuarioValido}" (keydown)="resetUsuario()" required>
                 <small *ngIf="!f('username')" class="text-danger">Este campo es obligatorio</small>
                 <small *ngIf="!usuarioValido" class="text-danger">Este usuario no existe</small>
             </div>
             <div>
                 <label for="password">Password</label><br>
-                <input class="form-control" type="password" id="password" formControlName="password" [ngClass]="{'is-invalid':!f('password')}" required>
+                <input class="form-control" type="password" id="password" formControlName="password" [ngClass]="{'is-invalid':!f('password') || !pwdValido}" (keydown)="resetPwd()" required>
                 <span *ngIf="!f('password')" class="text-danger">Este campo es obligatorio</span>
+                <small *ngIf="!pwdValido" class="text-danger">Las contraseñas no coinciden</small>
             </div>
             <br>
             <div>
-                <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Registrarse</button>
+                <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid">Iniciar Sesion</button>
             </div>
         </form>
     </div>

@@ -8,6 +8,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CrearUsuarioComponent } from './components/crear-usuario/crear-usuario.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ChatsComponent } from './components/chats/chats.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     FooterComponent,
     CrearUsuarioComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
+    ChatsComponent
   ],
   imports: [
     BrowserModule,

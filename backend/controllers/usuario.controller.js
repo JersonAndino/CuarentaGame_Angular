@@ -33,6 +33,9 @@ var controller={
 
         
     },
+    obtenerUsuarios:function(req,res){
+        // Usuario.find({})
+    },
     login:function(req,res){
         var username=req.body.username;
         var password=req.body.password;
@@ -42,13 +45,13 @@ var controller={
             if (!resultUser){ 
                 res.status(404).send({message:'no usuario'});
             }else{
+                if (resultUser.password==password){
+                    req.session.user=resultUser.username;
+                    res.status(200).send({result:{message:'Has iniciado sesión correctamente'}, session:req.session});
+                }else{
+                    res.status(404).send({message:'no password'});
+                }
             }
-            // if (username==result.username && password==result.password){
-            //     var userTemp=result;
-            //     delete userTemp.password;
-            //     req.session.user=userTemp;
-            //     res.status(200).send({message:'Has iniciado sesión correctamente',usuario:user,session:req.session});
-            // }
         })
         .catch(err => {
             //return res.status(404).send({message:'Algo ha fallado'});
@@ -56,8 +59,8 @@ var controller={
         })
     },
     getLogin:function(req,res){
-        req.session.user ? res.status(200).send({loggedIn: true,user:req.session.user.user,id:req.session.user._id}) : res.status(200).send({loggedIn: false});
-        
+        console.log(req.session);
+        req.session.user ? res.status(200).send({loggedIn: true,user:req.session.user}) : res.status(200).send({loggedIn: false});        
     },
     logout:function(req,res){
         req.session.destroy((err)=>{

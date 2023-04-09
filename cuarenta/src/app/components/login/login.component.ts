@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormBuilder, NgForm, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { UsuarioService } from 'src/services/usuario.service';
 
@@ -11,13 +12,16 @@ import { UsuarioService } from 'src/services/usuario.service';
   providers:[UsuarioService]
 })
 export class LoginComponent implements OnInit{
+  loggedIn:any;
   items:any;
   loginForm:any;
   usuarioValido:boolean;
   pwdValido:boolean;
   constructor(
     private formBuilder:FormBuilder,
-    private usuarioService:UsuarioService
+    private usuarioService:UsuarioService,
+    private router:Router,
+    private route:ActivatedRoute
   ){
     this.usuarioValido=true;
     this.pwdValido=true;
@@ -27,6 +31,13 @@ export class LoginComponent implements OnInit{
     });
   }
   ngOnInit(): void {
+    this.usuarioService.loggedIn.subscribe(res=>{
+      if(res==true) {this.loggedIn=true;}
+      console.log(res);
+      if(this.loggedIn==true){
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
   onSubmit(usuarioData:any){
     // console.log(this.usuarioForm.get('username'));
@@ -34,6 +45,7 @@ export class LoginComponent implements OnInit{
       response=>{
         if(response.result){
           this.loginForm.reset();
+          window.location.reload();
         }
       },error=>{
         switch (error.status){
@@ -48,7 +60,7 @@ export class LoginComponent implements OnInit{
                 break;
               };
               case 'no password':{
-                console.log("NO PWD");
+                this.pwdValido=false;
                 break;
               };
             }
@@ -67,7 +79,7 @@ export class LoginComponent implements OnInit{
       return true;
     }
   }
-  resetUser(){
+  resetUsuario(){
     if(!this.usuarioValido) this.usuarioValido=true;
   }
   resetPwd(){
